@@ -37,6 +37,15 @@ public class FXMLController {
     		try {
     			int numeroCrediti = Integer.parseInt(txtInput.getText());
     			Set<Esame> voti = model.calcolaSottoinsiemeEsami(numeroCrediti);
+    			if(voti == null) {
+    				txtResult.appendText("Non sono state trovate soluzioni\n");
+    				return;
+    			}
+    			
+    			txtResult.appendText("MEDIA: " + this.model.calcolaMedia(voti) + "\n");
+    			for(Esame e: voti) {
+    				txtResult.appendText(e.toString() + "\n");
+    			}
     			
     		} catch (NumberFormatException e) {
     			txtResult.setText("Inserire un numero di crediti > 0");
